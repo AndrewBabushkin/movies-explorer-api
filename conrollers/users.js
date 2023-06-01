@@ -34,7 +34,8 @@ const createUser = (req, res, next) => {
           next(err);
         }
       });
-  });
+  })
+    .catch(next);
 };
 
 const login = (req, res, next) => {
@@ -80,7 +81,13 @@ const updateUserInfo = (req, res, next) => {
       res.status(200).send(user);
     })
     .catch((err) => {
-      if (err instanceof mongoose.Error.ValidationError) {
+      if (err.code === 11000) {
+        next(
+          new EmailExistsError(
+            'Пользователь с таким email уже зарегистрирован.',
+          ),
+        );
+      } else if (err instanceof mongoose.Error.ValidationError) {
         next(new ValidationError('Переданы некорректные данные.'));
       } else {
         next(err);

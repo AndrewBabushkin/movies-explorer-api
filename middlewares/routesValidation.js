@@ -6,7 +6,7 @@ const urlRegex = require('../utils/constants');
 const singupValidation = {
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().min(8).required(),
+    password: Joi.string().required(),
     name: Joi.string().min(2).max(30).required(),
   }),
 };
@@ -14,7 +14,7 @@ const singupValidation = {
 const singinValidation = {
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().min(8).required(),
+    password: Joi.string().required(),
   }),
 };
 
@@ -30,7 +30,7 @@ const createMovieValidation = {
   body: Joi.object().keys({
     country: Joi.string().required(),
     director: Joi.string().required(),
-    duration: Joi.string().required(),
+    duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
     image: Joi.string().regex(urlRegex).required(),

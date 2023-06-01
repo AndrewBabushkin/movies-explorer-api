@@ -12,7 +12,7 @@ router.use('/movies', auth, moviesRouter);
 router.use('/signup', regRouter);
 router.use('/signin', loginRouter);
 
-router.all('*', (req, res, next) => {
+router.all('*', auth, (req, res, next) => {
   next(new DocumentNotFoundError('Страница не найдена!'));
 });
 

@@ -10,7 +10,7 @@ const {
 const config = {
   port: PORT || 3001,
   jwtSecret: NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-  connectDb: CONNECT,
+  connectDb: CONNECT || 'mongodb://127.0.0.1:27017/bitfilmsdb',
 };
 
 module.exports = config;
